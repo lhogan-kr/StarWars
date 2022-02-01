@@ -2,7 +2,9 @@ package com.example.starwars
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.core.os.bundleOf
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
@@ -10,20 +12,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        val characters = arrayListOf<Character>(
-            Character("Luke Skywalker", 24, "Tattoine"),
-            Character("Darth Vader", 60, "Tattoine")
-        );
-
-        for (i in 3..20) {
-            characters.add(if (i % 2 == 0) characters[1] else characters[0])
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            add(R.id.fragment_container, ListFragment())
+            addToBackStack(null)
         }
-
-        val adapter = CharacterAdapter(characters)
-
-        recyclerView.adapter = adapter
     }
 }
