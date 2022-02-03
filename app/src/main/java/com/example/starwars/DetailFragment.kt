@@ -7,14 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.starwars.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {
+
+    private var _binding: FragmentDetailBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_detail, container, false)
+        _binding = FragmentDetailBinding.inflate(inflater, container, false)
+        val view = binding.root
 
         if (arguments != null) {
             val name = requireArguments().getString("name")
@@ -22,12 +27,19 @@ class DetailFragment : Fragment() {
             val planet = requireArguments().getString("planet")
             val faction = requireArguments().getString("faction")
 
-            view.findViewById<TextView>(R.id.fragment_name).text = name
-            view.findViewById<TextView>(R.id.fragment_age).text = age.toString()
-            view.findViewById<TextView>(R.id.fragment_planet).text = planet
-            view.findViewById<TextView>(R.id.fragment_faction).text = faction
+            binding.apply {
+                fragmentName.text = name
+                fragmentAge.text = age.toString()
+                fragmentPlanet.text = planet
+                fragmentFaction.text = faction
+            }
         }
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

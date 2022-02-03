@@ -5,15 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import com.example.starwars.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {
+
+    private var _binding: FragmentListBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_list, container, false)
+        _binding = FragmentListBinding.inflate(inflater, container, false)
+        val view = binding.root
 
         // Fill out the data set
         val characters = mutableListOf(
@@ -25,9 +29,13 @@ class ListFragment : Fragment() {
             characters.add(if (i % 2 == 0) characters[1] else characters[0])
         }
 
-        val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
-        recyclerView.adapter = CharacterAdapter(characters)
+        binding.recyclerView.adapter = CharacterAdapter(characters)
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
