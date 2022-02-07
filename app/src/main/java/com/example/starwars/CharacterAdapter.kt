@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.starwars.databinding.CharacterListItemBinding
 
 class CharacterAdapter(
-    private val characters: List<Character>
+    private val characters: List<Character>,
+    private val onItemSelected: (character: Character) -> Unit
 ) :
     RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
 
@@ -23,25 +24,7 @@ class CharacterAdapter(
         binding = CharacterListItemBinding.inflate(layoutInflater, parent, false)
 
         return CharacterViewHolder(binding) { position ->
-            val activity = binding.root.context as AppCompatActivity
-
-            val character = characters[position]
-
-            val bundle = bundleOf(
-                "name" to character.name,
-                "age" to character.age,
-                "planet" to character.planet,
-                "faction" to character.faction
-            )
-
-            val detailFragment = DetailFragment()
-            detailFragment.arguments = bundle
-
-            activity.supportFragmentManager.commit {
-                setReorderingAllowed(true)
-                replace(R.id.fragment_container, detailFragment)
-                addToBackStack(null)
-            }
+            onItemSelected(characters[position])
         }
     }
 
