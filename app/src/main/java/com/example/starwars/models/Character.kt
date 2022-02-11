@@ -1,4 +1,4 @@
-package com.example.starwars
+package com.example.starwars.models
 
 data class Character(
     val name: String,

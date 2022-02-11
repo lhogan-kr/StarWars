@@ -1,12 +1,10 @@
-package com.example.starwars
+package com.example.starwars.ui.fragments.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
-import androidx.fragment.app.commit
 import androidx.recyclerview.widget.RecyclerView
 import com.example.starwars.databinding.CharacterListItemBinding
+import com.example.starwars.models.Character
 
 class CharacterAdapter(
     private val characters: List<Character>,

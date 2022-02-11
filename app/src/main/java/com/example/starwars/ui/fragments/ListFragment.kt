@@ -1,15 +1,23 @@
-package com.example.starwars
+package com.example.starwars.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
+import androidx.fragment.app.viewModels
+import com.example.starwars.R
 import com.example.starwars.databinding.FragmentListBinding
+import com.example.starwars.ui.fragments.adapter.CharacterAdapter
+import com.example.starwars.ui.viewmodels.ListViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ListFragment : Fragment() {
+
+    private val listViewModel: ListViewModel by viewModels()
 
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
@@ -19,25 +27,16 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentListBinding.inflate(inflater, container, false)
-        val view = binding.root
 
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Fill out the data set
-        val characters = mutableListOf(
-            Character("Luke Skywalker", 24, "Tattoine", "Rebellion"),
-            Character("Darth Vader", 60, "Tattoine", "Empire")
-        )
+        listViewModel.fillData()
 
-        for (i in 3..20) {
-            characters.add(if (i % 2 == 0) characters[1] else characters[0])
-        }
-
-        binding.recyclerView.adapter = CharacterAdapter(characters) { character ->
+        binding.recyclerView.adapter = CharacterAdapter(listViewModel.characters) { character ->
             val detailFragment = DetailFragment.newInstance(character)
 
             activity?.supportFragmentManager?.commit {

@@ -1,16 +1,21 @@
-package com.example.starwars
+package com.example.starwars.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.starwars.databinding.FragmentDetailBinding
+import com.example.starwars.models.Character
+import com.example.starwars.ui.viewmodels.DetailViewModel
 
 class DetailFragment : Fragment() {
+
+    private val detailViewModel: DetailViewModel by viewModels()
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
@@ -20,18 +25,23 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        detailViewModel.foo.observe(viewLifecycleOwner) { newCharacter ->
+//            // Set the stuff
+//            binding.fragmentAge.text = newFoo.toString()
+//        }
+
         if (arguments != null) {
-            val name = requireArguments().getString(DetailFragment.BUNDLE_NAME)
-            val age = requireArguments().getInt(DetailFragment.BUNDLE_AGE)
-            val planet = requireArguments().getString(DetailFragment.BUNDLE_PLANET)
-            val faction = requireArguments().getString(DetailFragment.BUNDLE_FACTION)
+            val name = requireArguments().getString(BUNDLE_NAME)
+            val age = requireArguments().getInt(BUNDLE_AGE)
+            val planet = requireArguments().getString(BUNDLE_PLANET)
+            val faction = requireArguments().getString(BUNDLE_FACTION)
 
             binding.apply {
                 fragmentName.text = name
