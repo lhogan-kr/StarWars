@@ -42,7 +42,7 @@ class CharacterAdapter(
 
         fun bind(character: Character) {
             binding.name.text = character.name
-            binding.age.text = character.age.toString()
+            binding.age.text = character.birthYear
         }
     }
 }

@@ -12,7 +12,6 @@ import com.example.starwars.databinding.FragmentListBinding
 import com.example.starwars.ui.fragments.adapter.CharacterAdapter
 import com.example.starwars.ui.viewmodels.ListViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ListFragment : Fragment() {
@@ -33,8 +32,6 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        listViewModel.fillData()
 
         binding.recyclerView.adapter = CharacterAdapter(listViewModel.characters) { character ->
             val detailFragment = DetailFragment.newInstance(character)

@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.starwars.databinding.FragmentDetailBinding
 import com.example.starwars.models.Character
 import com.example.starwars.ui.viewmodels.DetailViewModel
@@ -66,9 +64,9 @@ class DetailFragment : Fragment() {
         fun newInstance(character: Character): DetailFragment {
             val bundle = bundleOf(
                 BUNDLE_NAME to character.name,
-                BUNDLE_AGE to character.age,
-                BUNDLE_PLANET to character.planet,
-                BUNDLE_FACTION to character.faction
+                BUNDLE_AGE to character.birthYear,
+                BUNDLE_PLANET to character.homeworld,
+                BUNDLE_FACTION to character.eyeColor
             )
 
             val detailFragment = DetailFragment()
