@@ -7,7 +7,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ListViewModel @Inject constructor(charactersRepository: CharactersRepository) : ViewModel() {
+class ListViewModel @Inject constructor() : ViewModel() {
+
+    @Inject lateinit var charactersRepository: CharactersRepository
 
     val characters = charactersRepository.getCharacters()
 }

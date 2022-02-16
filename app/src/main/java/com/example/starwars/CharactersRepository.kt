@@ -30,6 +30,7 @@ class CharactersRepository @Inject constructor() {
                 call: Call<CharactersResult>,
                 response: Response<CharactersResult>
             ) {
+//                Log.d("CharactersRepository", response.body()!!.results.toString())
                 characters = response.body()!!.results
             }
 
