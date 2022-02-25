@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import com.example.starwars.databinding.FragmentDetailBinding
-import com.example.starwars.models.Character
 import com.example.starwars.ui.viewmodels.DetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
-
     private val detailViewModel: DetailViewModel by viewModels()
 
     private var _binding: FragmentDetailBinding? = null
@@ -23,29 +23,20 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        detailViewModel.foo.observe(viewLifecycleOwner) { newCharacter ->
-//            // Set the stuff
-//            binding.fragmentAge.text = newFoo.toString()
-//        }
+        detailViewModel.fillData(requireArguments().getInt(BUNDLE_ID))
 
-        if (arguments != null) {
-            val name = requireArguments().getString(BUNDLE_NAME)
-            val age = requireArguments().getInt(BUNDLE_AGE)
-            val planet = requireArguments().getString(BUNDLE_PLANET)
-            val faction = requireArguments().getString(BUNDLE_FACTION)
-
+        detailViewModel.character.observe(viewLifecycleOwner) { newCharacter ->
             binding.apply {
-                fragmentName.text = name
-                fragmentAge.text = age.toString()
-                fragmentPlanet.text = planet
-                fragmentFaction.text = faction
+                fragmentName.text = newCharacter.name
+                fragmentAge.text = newCharacter.birthYear
+                fragmentPlanet.text = newCharacter.homeworld
+                detailProgress.visibility = View.GONE
             }
         }
     }
@@ -56,21 +47,14 @@ class DetailFragment : Fragment() {
     }
 
     companion object {
-        const val BUNDLE_NAME = "name"
-        const val BUNDLE_AGE = "age"
-        const val BUNDLE_PLANET = "planet"
-        const val BUNDLE_FACTION = "faction"
+        const val BUNDLE_ID = "id"
 
-        fun newInstance(character: Character): DetailFragment {
-            val bundle = bundleOf(
-                BUNDLE_NAME to character.name,
-                BUNDLE_AGE to character.birthYear,
-                BUNDLE_PLANET to character.homeworld,
-                BUNDLE_FACTION to character.eyeColor
-            )
+        fun newInstance(id: Int): DetailFragment {
+            val bundle = bundleOf(BUNDLE_ID to id)
 
             val detailFragment = DetailFragment()
             detailFragment.arguments = bundle
+
             return detailFragment
         }
     }

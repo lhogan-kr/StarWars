@@ -1,5 +1,6 @@
 package com.example.starwars.ui.fragments.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,11 +8,15 @@ import com.example.starwars.databinding.CharacterListItemBinding
 import com.example.starwars.models.Character
 
 class CharacterAdapter(
-    private val characters: List<Character>,
-    private val onItemSelected: (character: Character) -> Unit
+    private val onItemSelected: (character: Character, position: Int) -> Unit
 ) :
     RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
 
+    init {
+        setHasStableIds(true)
+    }
+
+    private val characters = mutableListOf<Character>()
     private lateinit var binding: CharacterListItemBinding
 
     override fun onCreateViewHolder(
@@ -22,8 +27,15 @@ class CharacterAdapter(
         binding = CharacterListItemBinding.inflate(layoutInflater, parent, false)
 
         return CharacterViewHolder(binding) { position ->
-            onItemSelected(characters[position])
+            onItemSelected(characters[position], position)
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun refreshData(characters: List<Character>) {
+        this.characters.clear()
+        this.characters.addAll(characters)
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) =
@@ -41,6 +53,7 @@ class CharacterAdapter(
         }
 
         fun bind(character: Character) {
+            setIsRecyclable(true)
             binding.name.text = character.name
             binding.age.text = character.birthYear
         }

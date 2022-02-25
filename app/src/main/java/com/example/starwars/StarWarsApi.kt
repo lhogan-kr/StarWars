@@ -1,10 +1,15 @@
 package com.example.starwars
 
+import com.example.starwars.models.Character
 import com.example.starwars.models.CharactersResult
-import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface StarWarsApi {
     @GET("people/")
-    fun getAllCharacters(): Call<CharactersResult>
+    suspend fun getCharacters(): CharactersResult
+
+    @GET("people/{id}")
+    suspend fun getCharacterDetails(@Path("id") id: Int): Character
 }

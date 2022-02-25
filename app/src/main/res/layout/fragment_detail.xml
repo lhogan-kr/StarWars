@@ -1,48 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.fragments.DetailFragment">
 
+    <ProgressBar
+        android:id="@+id/detail_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone" />
+
     <TextView
         android:id="@+id/fragment_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:padding="@dimen/label_padding"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="@dimen/label_size"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/name" />
 
     <TextView
         android:id="@+id/fragment_age"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:padding="@dimen/label_padding"
         android:textAlignment="center"
         android:textSize="@dimen/label_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_planet"
         tools:text="@string/age" />
 
     <TextView
         android:id="@+id/fragment_planet"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="@dimen/label_padding"
+        android:textAlignment="center"
+        android:textSize="@dimen/label_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_faction"
+        tools:text="@string/planet" />
+
+    <TextView
+        android:id="@+id/fragment_faction"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:padding="@dimen/label_padding"
         android:textAlignment="center"
         android:textSize="@dimen/label_size"
-        tools:text="@string/planet" />
-
-    <TextView
-        android:id="@+id/fragment_faction"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/label_padding"
-        android:textAlignment="center"
-        android:textSize="@dimen/label_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_name"
         tools:text="@string/faction" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
