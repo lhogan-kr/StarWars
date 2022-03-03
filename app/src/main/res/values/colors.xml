@@ -8,4 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_grey">#f3f3f3</color>
+    <color name="progress_color">#2196F3</color>
+    <color name="divider_color">#DFE1E1</color>
+    <color name="primary_text_color">#181412</color>
+    <color name="secondary_text_color">#5D5E60</color>
+    <color name="kroger_blue">#084999</color>
 </resources>

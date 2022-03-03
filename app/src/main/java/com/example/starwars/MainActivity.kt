@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.myToolbar)
+
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             add(R.id.fragment_container, ListFragment())

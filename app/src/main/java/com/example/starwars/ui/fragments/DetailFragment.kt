@@ -32,6 +32,8 @@ class DetailFragment : Fragment() {
         detailViewModel.fillData(requireArguments().getInt(BUNDLE_ID))
 
         detailViewModel.character.observe(viewLifecycleOwner) { newCharacter ->
+            activity?.title = newCharacter.name
+
             binding.apply {
                 fragmentName.text = newCharacter.name
                 fragmentAge.text = newCharacter.birthYear

@@ -5,29 +5,41 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.starwars.databinding.CharacterListItemBinding
+import com.example.starwars.databinding.HeaderItemBinding
 import com.example.starwars.models.Character
 
 class CharacterAdapter(
     private val onItemSelected: (character: Character, position: Int) -> Unit
 ) :
-    RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     init {
         setHasStableIds(true)
     }
 
     private val characters = mutableListOf<Character>()
-    private lateinit var binding: CharacterListItemBinding
+
+    override fun getItemViewType(position: Int): Int {
+        return when (position) {
+            0 -> ITEM_VIEW_TYPE_HEADER
+            else -> ITEM_VIEW_TYPE_ITEM
+        }
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): CharacterViewHolder {
+    ): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        binding = CharacterListItemBinding.inflate(layoutInflater, parent, false)
 
-        return CharacterViewHolder(binding) { position ->
-            onItemSelected(characters[position], position)
+        return if (viewType == ITEM_VIEW_TYPE_HEADER) {
+            val binding = HeaderItemBinding.inflate(layoutInflater, parent, false)
+            HeaderViewHolder(binding)
+        } else {
+            val binding = CharacterListItemBinding.inflate(layoutInflater, parent, false)
+            CharacterViewHolder(binding) { position ->
+                onItemSelected(characters[getPosition(position)], getPosition(position))
+            }
         }
     }
 
@@ -38,13 +50,19 @@ class CharacterAdapter(
         notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) =
-        holder.bind(characters[position])
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is CharacterViewHolder)
+            holder.bind(characters[getPosition(position)])
+    }
 
-    override fun getItemCount() = characters.size
+    override fun getItemCount() = characters.size + 1
+
+    private fun getPosition(position: Int): Int {
+        return position - 1
+    }
 
     inner class CharacterViewHolder(
-        binding: CharacterListItemBinding,
+        private val binding: CharacterListItemBinding,
         private val onItemClick: (adapterPos: Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -53,9 +71,14 @@ class CharacterAdapter(
         }
 
         fun bind(character: Character) {
-            setIsRecyclable(true)
-            binding.name.text = character.name
-            binding.age.text = character.birthYear
+            this.binding.name.text = character.name
         }
+    }
+
+    inner class HeaderViewHolder(binding: HeaderItemBinding) : RecyclerView.ViewHolder(binding.root)
+
+    companion object {
+        private const val ITEM_VIEW_TYPE_HEADER = 0
+        private const val ITEM_VIEW_TYPE_ITEM = 1
     }
 }
