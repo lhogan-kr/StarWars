@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -24,6 +25,7 @@ class ListFragment : Fragment() {
 
         activity?.supportFragmentManager?.commit {
             setReorderingAllowed(true)
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             replace(R.id.fragment_container, detailFragment)
             addToBackStack(null)
         }
