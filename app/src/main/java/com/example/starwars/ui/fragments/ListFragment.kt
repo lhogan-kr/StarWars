@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.starwars.R
 import com.example.starwars.databinding.FragmentListBinding
 import com.example.starwars.ui.fragments.adapter.CharacterAdapter

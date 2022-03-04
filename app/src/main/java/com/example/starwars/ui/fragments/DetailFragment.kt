@@ -21,7 +21,7 @@ class DetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -35,10 +35,18 @@ class DetailFragment : Fragment() {
             activity?.title = newCharacter.name
 
             binding.apply {
-                fragmentName.text = newCharacter.name
-                fragmentAge.text = newCharacter.birthYear
-                fragmentPlanet.text = newCharacter.homeworld
+                height.text = newCharacter.height
+                mass.text = newCharacter.mass
+                hairColor.text = newCharacter.hairColor.replaceFirstChar { it.uppercase() }
+                skinColor.text = newCharacter.skinColor.replaceFirstChar { it.uppercase() }
+                eyeColor.text = newCharacter.eyeColor.replaceFirstChar { it.uppercase() }
+                birthYear.text = newCharacter.birthYear.uppercase()
+                gender.text = newCharacter.gender.replaceFirstChar { it.uppercase() }
+
+                // Hide and show the necessary views
                 detailProgress.visibility = View.GONE
+                infoCardView.visibility = View.VISIBLE
+                infoHeader.visibility = View.VISIBLE
             }
         }
     }

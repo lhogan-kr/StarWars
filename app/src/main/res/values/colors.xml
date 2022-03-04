@@ -13,4 +13,5 @@
     <color name="primary_text_color">#181412</color>
     <color name="secondary_text_color">#5D5E60</color>
     <color name="kroger_blue">#084999</color>
+    <color name="layout_background">#f4f6f8</color>
 </resources>
