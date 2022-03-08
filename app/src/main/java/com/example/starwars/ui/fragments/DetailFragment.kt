@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import com.example.starwars.R
 import com.example.starwars.databinding.FragmentDetailBinding
 import com.example.starwars.ui.viewmodels.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +24,14 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
+
+        binding.toolbar.title = "Star Wars"
+
+        binding.toolbar.apply {
+            setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
+            setNavigationOnClickListener { requireActivity().onBackPressed() }
+        }
+
         return binding.root
     }
 
@@ -32,7 +41,7 @@ class DetailFragment : Fragment() {
         detailViewModel.fillData(requireArguments().getInt(BUNDLE_ID))
 
         detailViewModel.character.observe(viewLifecycleOwner) { newCharacter ->
-            activity?.title = newCharacter.name
+            binding.toolbar.title = newCharacter.name
 
             binding.apply {
                 height.text = newCharacter.height
@@ -43,7 +52,7 @@ class DetailFragment : Fragment() {
                 birthYear.text = newCharacter.birthYear.uppercase()
                 gender.text = newCharacter.gender.replaceFirstChar { it.uppercase() }
 
-                // Hide and show the necessary views
+                // Show and hide the necessary views
                 detailProgress.visibility = View.GONE
                 infoCardView.visibility = View.VISIBLE
                 infoHeader.visibility = View.VISIBLE

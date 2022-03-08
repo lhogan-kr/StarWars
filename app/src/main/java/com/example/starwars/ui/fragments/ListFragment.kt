@@ -38,7 +38,9 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
-        activity?.title = "Star Wars"
+
+        binding.myToolbar.title = "Star Wars"
+
         return binding.root
     }
 
