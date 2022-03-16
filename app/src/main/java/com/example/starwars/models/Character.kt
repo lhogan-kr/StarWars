@@ -14,8 +14,8 @@ data class Character(
     @SerializedName("eye_color")
     val eyeColor: String,
     @SerializedName("birth_year")
+
     val birthYear: String,
-    
     val gender: String,
     val homeworld: String,
     val films: List<String>,

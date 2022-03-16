@@ -1,11 +1,11 @@
 package com.example.starwars.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.starwars.R
 import com.example.starwars.databinding.FragmentDetailBinding
@@ -20,14 +20,14 @@ class DetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
 
-        binding.toolbar.title = "Star Wars"
-
         binding.toolbar.apply {
+            title = "Star Wars"
             setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
             setNavigationOnClickListener { requireActivity().onBackPressed() }
         }

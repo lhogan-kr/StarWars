@@ -1,7 +1,7 @@
 package com.example.starwars
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.example.starwars.databinding.ActivityMainBinding
 import com.example.starwars.ui.fragments.ListFragment

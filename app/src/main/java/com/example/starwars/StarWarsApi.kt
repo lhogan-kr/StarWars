@@ -4,7 +4,6 @@ import com.example.starwars.models.Character
 import com.example.starwars.models.CharactersResult
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface StarWarsApi {
     @GET("people/")
