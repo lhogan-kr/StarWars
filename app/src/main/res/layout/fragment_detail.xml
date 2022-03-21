@@ -180,7 +180,7 @@
                     style="@style/info_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/hair_color" />
+                    android:text="@string/birth_year" />
 
                 <TextView
                     android:id="@+id/birth_year"

@@ -1,11 +1,9 @@
 <resources>
-    <string name="app_name">Star Wars</string>
-    <string name="name">Name</string>
-    <string name="planet">Planet</string>
-    <string name="age">24</string>
-    <string name="faction">Rebellion</string>
+    <!--  List Fragment  -->
     <string name="characters">CHARACTERS</string>
-    <string name="information_description">Information</string>
+    <string name="app_name">Star Wars</string>
+
+    <!--  Detail Fragment Labels  -->
     <string name="general_info">General Info</string>
     <string name="height">Height:</string>
     <string name="mass">Mass:</string>
@@ -13,4 +11,6 @@
     <string name="gender">Gender:</string>
     <string name="skin_color">Skin Color:</string>
     <string name="eye_color">Eye Color:</string>
+    <string name="birth_year">Birth Year:</string>
+
 </resources>
